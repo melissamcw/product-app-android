@@ -1,0 +1,9 @@
+{
+  "name": "hid-product-solutions-app",
+  "description": "HID Global Product Solutions Application",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "~4.4.3"
+  }
+}

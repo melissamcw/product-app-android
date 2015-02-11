@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <meta charset="utf-8">
+  <meta name="format-detection" content="telephone=no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1 width=device-width height=device-height" />
+  
+  <title>HID Product Solutions App</title> 
+  
+    <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/idangerous.swiper.css">
+        <link rel="stylesheet" href="css/hid.css">
+        <link rel="stylesheet" href="css/app.css">
+         
+ 
+</head>
+    <body>
+
+        <section class="container homepage">
+            <div class="products-content">
+            <h2 class="product-lines"><center>Product Lines</center></h2>
+      
+
+            <ul id="vertical_list">
+                <li><a href="vertical.html#pacs" class="verticalcategory" data-verticalcategory="pacs"><img src="img/physical-access.png" alt=""  /> Physical Access</li>
+                <li><a href="vertical.html#logical" class="verticalcategory" data-verticalcategory="logical"><img src="img/logical-access.png" alt=""  /> Logical Access</a></li>
+                <li><a href="vertical.html#card" class="verticalcategory" data-verticalcategory="card"><img src="img/credentials.png" alt=""  /> Card Printers</a></li>
+            </ul>
+        </div>
+            <img src="img/bg.png" class="bg">
+
+        </section>
+
+
+        <!-- Cordova core JS -->
+        <script type="text/javascript" src="cordova.js"></script>
+
+        <!-- jquery -->
+        <script src="js/vendor/jquery-1.10.2.min.js"></script>
+
+        <!-- fastclick and cookie plugin -->
+        <script type='application/javascript' src='js/vendor/fastclick.js'></script>
+        <script type='application/javascript' src='js/vendor/jquery.cookie.js'></script>
+
+        <!-- custom js code -->
+        <script src="js/main.js"></script>
+
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                
+                $('.verticalcategory').click(function(e){
+
+                    cookieValue = $(this).data('verticalcategory');
+                    // $.cookie('verticalcategory', cookieValue);
+                    window.localStorage.setItem("verticalcategory", cookieValue);
+
+                });
+
+
+
+            }); 
+
+
+        </script>
+       
+
+    </body>
+</html>

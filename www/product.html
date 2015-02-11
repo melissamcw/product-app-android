@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="format-detection" content="telephone=no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="initial-scale=1 width=device-width, height=device-height" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>HID Product solution app</title>
+
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/idangerous.swiper.css">
+        <link rel="stylesheet" href="css/app.css">
+        <link rel="stylesheet" href="css/hid.css">
+
+    </head>
+    <body>
+
+       <div id="header"><img src="img/brick.png"></div>
+      <div class="reset-icon"><a href="javascript: history.go(-1)"><i class="fa fa-chevron-left"></i></a></div>
+
+        <section class="container product-info">
+
+
+          <div class="product-box">
+
+
+            <div class="swiper-container product-slider">
+              <div class="swiper-wrapper">
+                <!-- Content to be inserted here dynamically -->
+              </div>
+
+            </div>
+
+
+            
+             <img src="img/bg.png" class="bg">
+
+        </section>
+
+
+        <!-- jquery -->
+        <script src="js/vendor/jquery-1.10.2.min.js"></script>
+        <!-- slider library -->
+        <script src="js/vendor/idangerous.swiper.min.js"></script>
+        <!-- fastclick -->
+        <script type='application/javascript' src='js/vendor/fastclick.js'></script>
+        <!-- papa parse -->
+        <script type='application/javascript' src='js/vendor/papaparse.min.js'></script>
+        <!-- Cookie plugin -->
+        <script type='application/javascript' src='js/vendor/jquery.cookie.js'></script>
+
+        <!-- plugin and custom js code -->
+        <script type='application/javascript' src="js/main.js"></script>
+        <script type='application/javascript' src="js/SocialSharing.js"></script>
+
+        <!-- page specific logic -->
+        <script type="text/javascript">
+            $(document).ready(function() {
+
+              //store hash value for querying json array
+              window.hashvalue = window.localStorage.getItem("productIndexSelected");
+
+              paparesults(window.jsonproductsarray);
+
+
+              //setup callback method for when papa parse is finished
+              function paparesults(results){
+                    
+                    //run through json array and dump all the elements for the slider
+                    $.each( results, function( key, value ) {
+                        if( value['vertical'] == window.localStorage.getItem("verticalcategory")  ){
+                            $('.swiper-wrapper').append('<div class="swiper-slide"> <div class="product-slide"><div class="blue-box-product"><h1>'+ value['name'] +'</h1> <img src="'+ value['imagefilename'] +'" alt="" /><p>'+ value['description'] +'</p> <div class="datasheet-download-btn"><a href="'+ value['pdf'] +'" title="">Share Datasheet</a></div> </div> </div>'
+                            );                             
+                        }
+                    });               
+
+                    //once we've run through the csv entries and added them to the dom, finally call and enable the swiper
+                    window.mySwiper = $('.product-slider').swiper({
+                        mode:'horizontal',
+                        loop: false,
+                        onSlideChangeEnd: function () {
+                              $('#next_swiper').show();
+                              $('#previous_swiper').show();
+                              if(window.mySwiper.activeIndex==0){
+                                    $('#previous_swiper').hide()
+                              }
+                              if(window.mySwiper.activeIndex==window.mySwiper.slides.length-1){
+                                    $('#next_swiper').hide()
+                              }
+                         }
+                    });
+
+                    //once the slider is setup move to the previously selected product via it's index.
+                    window.mySwiper.swipeTo( window.localStorage.getItem("productIndexSelected"), 10, true);
+
+
+
+              }//closing paparesults
+
+              jQuery('div.datasheet-download-btn a').click(function(event){
+              window.plugins.socialsharing.share(null,null,jQuery(this).attr('href'));
+              event.preventDefault();
+            });
+
+          }); 
+
+        </script>
+
+
+       
+
+    </body>
+</html>

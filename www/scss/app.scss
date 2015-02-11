@@ -1,0 +1,504 @@
+// Styles for app
+
+
+// Vars
+$blue : #05549C;
+
+$begin_gradient_color : #05549C;
+$end_gradient_color : #F4F7FC;
+
+
+
+
+//include font awesome
+@import '../fontawesome/font-awesome.scss';
+
+//include HID fonts
+@import '../fonts/font.css';
+
+// include tablet media query
+@import 'tablet.scss';
+
+
+
+// body and html styles
+html{
+	height:100%;
+
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0, #05539C),
+		color-stop(1, #FFFFFF)
+	);
+
+	//background-image: -webkit-linear-gradient(top, #05539C 0%, #FFFFFF 100%);
+	background-image: linear-gradient(to top, #05539C 0%, #FFFFFF 100%);
+
+}
+
+body, html{
+
+	font-family: 'Gotham Medium';
+
+	padding: 0% 2.5% 0 2.5%;
+	text-align: center;
+
+	overflow:hidden; 
+
+	height:100%;
+
+	
+
+}
+
+
+
+
+// plugin styles
+	
+/* Specify Swiper's Size: */
+.swiper-container, .swiper-slide{
+  width: 96%;
+  height: 73%;
+  position: relative; 
+  z-index: 100;
+  img{
+  	width: 100%;
+  }
+}
+.vertical .swiper-container, .vertical .swiper-container{
+	// left:1px;
+}
+.product-info .swiper-container{
+	width:94%;
+	height: 100% !important;
+}
+.product-info .swiper-slide{
+	width:100%;
+	height: 100% !important; 
+}
+
+.my-pagination {
+  position: absolute;
+  left: 0;
+  text-align: center;
+  bottom:0;
+  width: 100%;
+}
+.swiper-pagination-switch {
+	display: inline-block;
+	width: 7px;
+	height: 7px;
+	border: 1px solid $blue; 
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	background: #FFF;
+	margin: 0 3px;
+	cursor: pointer;
+}
+.swiper-active-switch{
+	background: $blue;
+}
+
+p#next_swiper, p#previous_swiper{
+	width: 5%;
+	font-size: 1.5em;
+	position: absolute;
+	top: 27%;
+	color: $blue;
+}
+p#next_swiper{
+	right: 1%;
+	cursor: pointer;
+	width: 6%;
+	img{
+		width: 100%;
+	}
+}
+p#previous_swiper{
+	left: 1%;
+	cursor: pointer;
+	width: 6%;
+	img{
+		width: 100%;
+	}
+}
+
+
+
+
+
+// overall container styles
+.container{
+	margin: 7% auto 0 auto;
+	text-align: center;
+	
+	width:100%;
+	max-width: 1024px;
+	height: 100% !important;	
+
+}
+
+
+// common elements throughout screens 
+#logo{
+	width: 50%;
+	height: auto;
+	margin: 0 auto;
+}
+
+.reset-icon{
+	position: absolute;
+	right: 3.5%;
+	top: 3.5%;
+	cursor: pointer;
+	z-index: 1000;
+	i{
+		font-size: 1.3em;
+		color: $blue;
+	}
+}
+
+
+a{
+	cursor: pointer !important;
+}
+
+
+.hide{
+	display: none !important;
+}
+
+
+
+
+
+// Homepage
+
+section.homepage{
+
+	height:100%;
+
+	h1{
+		font-family: 'Gotham Light';
+		font-size: 1.5em;
+		font-weight: normal;
+	}
+
+	ul#vertical_list{
+		margin: 15% auto 0 auto;
+		padding: 0;
+		width: 80%;
+		li{
+			list-style-type: none;
+			padding: 0.5em 0 0.5em 15%;
+			margin: 1em 0;
+			background-color: $blue;
+			color: #FFFFFF;
+			-webkit-border-radius: 10px;
+			-moz-border-radius: 10px;
+			border-radius: 10px;
+			z-index: 10 !important;
+			position: relative;
+			text-align: left;
+
+
+			background-image: -webkit-gradient(
+				linear,
+				left bottom,
+				left top,
+				color-stop(0, $blue),
+				color-stop(1, #6C99C4)
+			);
+
+			//background-image: -webkit-linear-gradient(top, #05539C 0%, #FFFFFF 100%);
+			background-image: linear-gradient(to top, $blue 0%, #6C99C4 100%);
+
+			&:last-child{
+				a img{
+					position: relative;
+					left: -2%;
+					top: -0.1em;
+				}
+				
+			}
+			a{
+				color: #FFF;
+				text-decoration: none;
+				font-family: 'Gotham Light';
+				font-size: 120%;
+			}
+			img{
+				width: 15%;
+				display: inline;
+				margin: 0 5% 0 0;
+			}
+		}
+	}
+
+	#passwordrequest{
+		margin: 5em auto;
+		font-size: 0.7em;
+		a{
+			color: $blue;
+			text-decoration: none;
+		}
+	}
+
+}
+
+section.vertical{
+	
+	height:97% !important; 
+
+	header{
+		width: 100%;
+		margin: 0 0 0 0;
+		padding: 0 0 1.2em 0;
+		text-align: left;
+		.vertical-icon{
+			position: absolute;
+			left: 5%;
+			top: 5%;
+			img{
+				width: 19%;
+			}
+		}
+	}
+
+	h1{
+		font-family: 'Gotham Light';
+		font-weight: lighter;
+		margin: 14.5% 0 0 0;
+		padding: 0 0 0 21%;
+		text-align: left;
+		line-height: 1em;
+		font-size: 180%;
+	}
+
+	.product-thumbnails{
+		height: 100%;
+		position: relative;
+		left: 1%;
+		div{
+			width: 31%;
+			height: 20%;
+			float: left;
+			margin: 8% 2% 0 0;
+			a{
+				text-decoration: none;
+			}
+			p{
+				font-family: 'Gotham Light';
+				font-size: 0.55em;
+				margin: 5% 0 0 0;
+				color: #000;
+				line-height: 1em;
+			}
+		}
+		img{
+			width: 100%;
+			border: 1px solid $blue;
+			border-radius: 10px;
+		}
+	}
+}
+
+section.product-info{
+
+	height: 100%;
+
+	header{
+		width: 100%;
+		margin: 0;
+		padding: 0 0 0.5em 0;
+		.vertical-icon{
+			position: absolute;
+			left: 10%;
+			top: 5%;
+			i{
+				font-size: 2.5em;
+				color: $blue;
+			}
+		}
+	}
+
+	h1{
+		font-weight: normal;
+		margin: 5% 0 5% 0;
+		padding: 0 0 0 2%;
+		text-align: center;
+		line-height: 120%;
+		font-size: 120%;
+	}
+
+	.product-slide{
+		height: 100% !important;
+		img{
+			width: 93%;
+			margin: 0 0 3% 0;
+			border: 1px solid $blue;
+			-webkit-border-radius: 10px;
+			-moz-border-radius: 10px;
+			border-radius: 10px;
+		}
+		p{
+			font-size: 90%;
+		}
+		.datasheet-download-btn{
+			width:35%;
+			padding: 1% 2%;
+			margin: 0 auto;
+			font-size: 70%;
+			color: #000;
+			background-color: #FFF;
+			border: 2px solid $blue;
+			-webkit-border-radius: 10px;
+			-moz-border-radius: 10px;
+			border-radius: 10px;
+			a{
+				text-decoration: none;
+				color: inherit;
+			}
+		}
+	}
+
+}
+
+
+form#entry_form{
+
+	input{
+		border: 1px solid $blue; 
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+		border-radius: 4px;
+		padding: 0.2em;
+		margin: 1em auto;
+		width: 90%;
+		color: #666666 !important;
+		clear: both !important;
+		display: block;
+		text-align: center;
+	}
+	#form_submit{
+		width:35%;
+		padding: 0.5em 0.2em 0.4em 0.2em;
+		margin: 0.5em auto 0 auto;
+		font-size: 0.8em;
+		color: #000;
+		background-color: #FFF;
+		border: 2px solid $blue;
+		-webkit-border-radius: 10px;
+		-moz-border-radius: 10px;
+		border-radius: 10px;
+		position: relative;
+		z-index: 100 !important;
+		&:active{
+			background-color: $blue;
+			color:#FFFFFF;
+		}
+	}
+
+
+}
+
+
+
+section.form{
+	height:100%;
+	z-index: 1000 !important;
+
+	h1{
+		font-size: 1.5em;
+		font-weight: normal;
+		font-family: 'Gotham Light';
+		margin-bottom: 0; 
+	}
+	p{
+		font-size: 0.8em;
+		width: 90%;
+		margin: 0 auto;
+	}
+	#success_message{
+		margin-top: 1em;
+		a{
+			color: $blue;
+			text-decoration: none;
+		}
+	}
+
+	
+	form{
+		margin: 1em 0 0 0;
+		input, select{
+			border: 1px solid $blue; 
+			-webkit-border-radius: 4px;
+			-moz-border-radius: 4px;
+			border-radius: 4px;
+			padding: 0.2em;
+			margin: 0.4em auto;
+			width: 70%;
+			color: #666666 !important;
+			clear: both !important;
+			display: block;
+		}
+		select{
+			width: 73%;
+			color: #666666;
+			font-size: 0.9em;
+		}
+		#form_submit{
+			width:35%;
+			padding: 0.5em 0.2em 0.4em 0.2em;
+			margin: 0.5em auto 0 auto;
+			font-size: 0.8em;
+			color: #000;
+			background-color: #FFF;
+			border: 2px solid $blue;
+			-webkit-border-radius: 10px;
+			-moz-border-radius: 10px;
+			border-radius: 10px;
+			position: relative;
+			z-index: 100 !important;
+			&:active{
+				background-color: $blue;
+				color:#FFFFFF;
+			}
+		}
+	}
+
+}
+
+
+
+footer{
+	position: absolute;
+	bottom: 1%;
+	left: 0;
+	width: 100%;
+	height: 15%;
+	text-align: center;
+	padding: 0;
+	margin:0;
+	z-index: 1;
+	background-image:url(../img/chain.png);
+	background-repeat:no-repeat;
+	background-size: 160% auto;
+	background-position:-5% 0;
+	background-color:transparent; 
+	p{
+		font-family: 'Gotham Light';
+		padding: 0;
+		margin-top:15% !important;
+		color: #FFF;
+		font-size: 0.7em !important;
+	}
+
+}
+
+
+

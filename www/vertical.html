@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1 width=device-width height=device-height" />
+        <title>HID Product solution app</title>
+
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/idangerous.swiper.css">
+        <link rel="stylesheet" href="css/hid.css">
+        <link rel="stylesheet" href="css/app.css">
+        <link rel="stylesheet" href="css/plugins.css"/>
+        <link rel="stylesheet" href="lib/onsen/css/onsenui.css">  
+        <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css">  
+
+    </head>
+    <body>
+        <div id="header"><img src="img/brick.png"></div>
+        <div class="reset-icon"><a href="index.html"><i class="fa fa-chevron-left"></i></a></div>
+      
+      <section class="container vertical">
+      
+        
+            <header>      
+              <div class="vertical-icon"></div>
+              <h1 id="vertical-title"></h1>
+            </header>
+
+
+            <!--<p id="next_swiper"><img src="img/arrow-right.png" alt="" /> </p>
+            <p id="previous_swiper" style="display:none;"><img src="img/arrow-left.png" alt="" /> </p> -->
+
+
+
+            <div class="swiper-container">
+              <div class="swiper-wrapper">
+                 <!-- content to be inserted here -->
+              </div> 
+
+
+              <div class="my-pagination"></div>
+
+            </div>
+
+            <img src="img/bg.png" class="bg">
+            
+        </section>
+
+
+
+
+         <!-- Cordova core JS -->
+        <script type="text/javascript" src="cordova.js"></script>
+
+        <!-- jquery -->
+        <script src="js/vendor/jquery-1.10.2.min.js"></script>
+        <!-- slider library -->
+        <script src="js/vendor/idangerous.swiper.min.js"></script>
+
+        <!-- fastclick -->
+        <script type='application/javascript' src='js/vendor/fastclick.js'></script>
+        <script type='application/javascript' src='js/vendor/jquery.cookie.js'></script>
+
+        <!-- papa parse -->
+        <script type='application/javascript' src='js/vendor/papaparse.min.js'></script>
+
+        <!-- custom js code -->
+        <script src="js/functions.js"></script>
+        <script src="js/main.js"></script>
+
+        <!-- page specific logic -->
+        <script type="text/javascript">
+            <!--
+
+            $(document).ready(function() {
+
+              //store hash value for querying json array
+              // window.hashvalue = location.hash.substr(1);
+              window.hashvalue = window.localStorage.getItem("verticalcategory") ;
+
+              //dependent on hash value decide what to show
+              if (window.hashvalue == 'pacs') {
+                $('.vertical-icon').html('<img src="img/physical-access.png" alt=""  />');
+                $('#vertical-title').html('Physical Access');
+              }
+              else if(window.hashvalue == 'logical'){
+                $('.vertical-icon').html('<img src="img/logical-access.png" alt=""  />');
+                $('#vertical-title').html('Logical Access');
+              }
+              else{
+                $('.vertical-icon').html('<img src="img/credentials.png" alt=""  />');
+                $('#vertical-title').html('Card Printers');
+              };
+
+
+              paparesults(window.jsonproductsarray);
+          
+
+              //setup callback method for when papa parse is finished
+              function paparesults(results){
+
+                    // setup initial vars 
+                    vertical_count = 0;
+                    i = 0;
+
+                    //run through json array to determine how many of the chosen vertical products there are
+                    $.each( results, function( key, value ) {
+                        if( value['vertical'] == window.hashvalue){
+                            vertical_count++;
+                            i++;
+                        }
+                    });
+
+                    //store the total count of the specified vertical to use later on
+                    totalItems = i;
+
+                    //store the number of slides we need based on value of i and then zero i for next counter
+                    numslides = Math.ceil(i/2);
+                    i = 0;
+
+                    //add the number of requied slide containers to the slide wrapper in preparation for filling them with the required images
+                    while( i < numslides ){
+                        $('.swiper-wrapper').append('<div class="swiper-slide" id="slider-'+i+'"> <div class="product-thumbnails"></div> </div>');
+                        i++;
+                    }
+
+                    i = 0;
+                    $('.swiper-slide').each(function(){
+                        i = 0;
+
+                        idofslide = $(this).attr('id');
+
+                        $.each( results, function( key, value ) {
+
+                            if( value['model'] == null ){
+                              return true;
+                            }
+
+                            if( value['vertical'] != window.hashvalue ){
+                              return true;
+                            }
+
+                            if( i >= 2){
+                              return false;
+                            }
+                            i++;
+
+                            //insert links and images for slider 
+                            $('#'+idofslide).find('.product-thumbnails').append('<div class="blue-box-vertical"><a href="product.html"><img src="'+ value['imagefilename'] +'" alt="" /><p>'+value['name']+'</p></a></div>');
+                            
+                            // remove inserted element from JSON array so it's not inserted again
+                            value['model'] = null;
+
+                        });
+
+                    });
+
+                    //once we've run through the csv entries and added them to the dom, finally call and enable the swiper
+                    window.mySwiper = $('.vertical-slider').swiper({
+                          //Your options here:
+                          mode:'horizontal',
+                          loop: false,
+                          pagination: '.my-pagination',
+                          onSlideChangeEnd: function () {
+                              $('#next_swiper').show();
+                              $('#previous_swiper').show();
+                              if(window.mySwiper.activeIndex==0){
+                                    $('#previous_swiper').hide()
+                              }
+                              if(window.mySwiper.activeIndex==window.mySwiper.slides.length-1){
+                                    $('#next_swiper').hide()
+                              }
+                         }
+                    });
+
+
+                    $('.swiper-wrapper').delay(500).removeClass('hide');
+
+
+
+              }//closing paparesults
+
+
+              //bind a handler to the anchors to log the index of the anchor clicked. Used on next page to go straight to the selcted product.
+              $('.swiper-wrapper').on('click', '.swiper-slide div.product-thumbnails div a', function(e){
+
+                // get id of swiper-slide container
+                idofslide = $(this).parents('.swiper-slide').attr('id');
+
+                //from the ID get the number 0, 1, 2 etc
+                multiplier = idofslide.charAt(idofslide.length - 1);
+
+                //calulate the index to use on next screen
+                finalIndex = 0;
+
+                // calc the index of the product for the next page
+                if ( multiplier == 0 ) {
+                  finalIndex = $(this).parents('div').index();
+                }
+                else{
+                  finalIndex = $(this).parents('div').index() + ( 2 * multiplier );
+                };
+
+                //store finalIndex in a cookie so we can go straight to it on the product page
+                window.localStorage.setItem("productIndexSelected", finalIndex);
+
+
+              });
+
+
+
+            }); 
+
+        -->
+        $(document).one('mobileinit', function () {
+ 
+            // Setting #container div as a jqm pageContainer
+            $.mobile.pageContainer = $('section.vertical');
+ 
+            // Setting default page transition to slide
+            $.mobile.defaultPageTransition = 'slide';
+ 
+        });
+ 
+
+        </script>
+
+
+
+        
+        
+
+       
+
+    </body>
+</html>
